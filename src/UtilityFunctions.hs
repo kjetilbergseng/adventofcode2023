@@ -72,8 +72,8 @@ splitPair :: Eq a => a -> [a] -> ([a], [a])
 splitPair sep=pairMap (remove [sep]) . span (/= sep)
 
 replaceText :: Eq a => [a] -> [a] -> [a] -> [a]
-replaceText [] _ _ = []
-replaceText s find repl =
+replaceText _ _ [] = []
+replaceText find repl s  =
     if take (length find) s == find
-        then repl ++ replaceText (drop (length find) s) find repl
-        else head s : replaceText (tail s) find repl
+        then repl ++ replaceText find repl (drop (length find) s) 
+        else head s : replaceText find repl (tail s) 
