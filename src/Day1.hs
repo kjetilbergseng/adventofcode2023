@@ -35,7 +35,6 @@ combine a b = [a,b]
 findFirstAndLast :: [[Char]] -> [[Char]]
 findFirstAndLast = map $ liftA2 combine findFirstNumber findLastNumber
 
-
 day1a :: [[Char]] -> Int
 day1a input =  sum $ map (read @Int . addFirstAndLastNumber . getInts) input
 
