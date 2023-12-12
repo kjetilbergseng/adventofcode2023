@@ -1,6 +1,7 @@
 module UtilityFunctions where
 
 import Debug.Trace (trace)
+import Data.Char(ord)
 
 chunk :: Int -> [a] -> [[a]]
 chunk n ls
@@ -49,6 +50,9 @@ transformElement n fn li = do take n li <> [fn (li !! n)] <> drop (n + 1) li
 
 transformElement2d :: Int -> Int -> (t -> t) -> [[t]] -> [[t]]
 transformElement2d i j fn li = do take i li <> [transformElement j fn (li !! i)] <> drop (i + 1) li
+
+charIsNumber :: Char -> Bool
+charIsNumber x=ord x > 47 && ord x < 58
 
 (#) :: c -> String -> c
 (#) = flip trace
