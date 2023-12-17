@@ -63,7 +63,6 @@ recursiveGetRanges x (y:ys) =
     getIntersectionPoints x y ++
     recursiveGetRanges x ys
 
-
 day5b :: ([[Int]], [String]) -> [(Int, Int)] -> [(Int, Int)]
 day5b (rs, []) xs = recursiveGetRanges rs xs
 day5b (rs, rest) xs = day5b (parseMaps rest) (recursiveGetRanges rs xs)
@@ -78,4 +77,3 @@ day5 = do
     let (_, rest) = parseMaps $ lines contents
     print $ day5a rest seeds
     print $ minimum $ map fst $ day5b (parseMaps rest) (seedPairs seeds)
-
