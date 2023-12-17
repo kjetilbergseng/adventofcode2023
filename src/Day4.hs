@@ -1,8 +1,6 @@
 module Day4(day4) where
 
-import UtilityFunctions(readInt, split, splitOn)
-import Control.Applicative ( liftA2)
-import Data.Char (isDigit)
+import UtilityFunctions(readInt, split)
 
 score :: Int -> Int
 score 0 = 0
@@ -23,7 +21,7 @@ day4a [x,y]= score $ countMatches x y
 multipliers :: Num a => [a] -> Int -> Int -> [a]
 multipliers xs pos matches = take pos xs ++ map (+ xs!!(pos-1)) (take matches (drop pos xs)) ++ drop (pos + matches) xs
 
-updateMultipliers :: Num a => [Int] -> Int -> [a] -> [a]
+updateMultipliers :: [Int] -> Int -> [Int] -> [Int]
 updateMultipliers [x] pos m = multipliers m pos x
 updateMultipliers (x:xs) pos m = updateMultipliers xs (pos+1) (multipliers m pos x)
 
@@ -34,5 +32,5 @@ day4 = do
     print $ sum $ map (day4a . parse) (lines contents)
 
     let matchesList = map (countMatches2 . parse) (lines contents)
-    let xs=[1 | x <-[1..length matchesList]]
+    let xs=[1 | _ <-[1..length matchesList]]
     print $ sum $ updateMultipliers matchesList 1 xs

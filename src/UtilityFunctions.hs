@@ -8,10 +8,17 @@ chunk n ls
   | n <= 0 || null ls = []
   | otherwise = take n ls : chunk n (drop n ls)
 
-split :: Eq a => a -> [a] -> [[a]]
-split sep ls
+splitIf :: (a -> Bool) -> [a] -> [[a]]
+splitIf pred ls
   | null ls = []
-  | otherwise = takeWhile (/= sep) ls : split sep (drop 1 $ dropWhile (/= sep) ls)
+  | otherwise = takeWhile pred ls : splitIf pred (drop 1 $ dropWhile pred ls)
+
+splitOnIf :: Foldable t => (a -> Bool) -> t [a] -> [[a]]
+splitOnIf pred = concatMap (splitIf pred)
+
+split :: Eq a => a -> [a] -> [[a]]
+split sep =
+  splitIf (/= sep)
 
 splitEachChar :: [Char] -> [String]
 splitEachChar ls
