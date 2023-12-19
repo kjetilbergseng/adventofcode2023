@@ -1,7 +1,6 @@
 module Day6 where
-import UtilityFunctions(readInt, split, splitOn)
+import UtilityFunctions(readInt, split)
 import Data.Char (isDigit)
-import GHC.Float ()
 
 parse :: [Char] -> [Int]
 parse = map readInt . 
@@ -11,7 +10,6 @@ parse = map readInt .
 
 toDouble :: Integral a => a -> Double
 toDouble num = fromIntegral num :: Double
-
 
 parsePartb :: [Char] -> Int
 parsePartb = readInt . filter isDigit
