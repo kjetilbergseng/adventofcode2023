@@ -9,7 +9,6 @@ parseHands = map (takeWhile (/= ' '))
 parseBid :: [[Char]] -> [Int]
 parseBid = map (readInt . dropWhile (/= ' '))
 
-
 findMultipes :: [[Char]] -> [Int]
 findMultipes  = map ((10000000000 *) . sum . zipWith (*) [100, 10, 1] . reverse  . sort . map length . group . sort)
 
@@ -26,7 +25,7 @@ toNumber jVal c
     | otherwise = readInt [c]
 
 handValue :: (Char -> Bool) -> Int -> [[Char]] -> [Int]
-handValue pred jVal hand= zipWith (+) (map (highCardValue jVal) hand) (findMultipes $ map (filter pred) hand)
+handValue predicate jVal hand= zipWith (+) (map (highCardValue jVal) hand) (findMultipes $ map (filter predicate) hand)
 
 jokerHandValue :: [[Char]] -> [Int] -> [Int]
 jokerHandValue hand joker = zipWith (+) (handValue (/= 'J') 1 hand) (map (1000000000000 *) joker)
